@@ -3,11 +3,15 @@ import './App.css';
 import './Relogio.css'
 
 const generateTime = (extraHours) => {
-    let today = new Date();
-    let totalHours = today.getHours() + extraHours
-    let time = totalHours + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const today = new Date();
+    const totalHours = today.getHours() + extraHours
+    const time = totalHours + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-    return time;
+    const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+
+    // console.log(totalHours)
+
+    return time + " - " + date;
 }
 
 function toggleCountries() {
@@ -18,7 +22,8 @@ function toggleCountries() {
 const Relogio = (props) => (
     <div>
         <h1>Brasília, Brasil:</h1>
-        <p className="localTime mb-30">{generateTime(0)}</p>
+        <h2 className="localTime mb-30">{generateTime(0)}</h2>
+
         <button onClick={toggleCountries} id="toggleCountries">Outros países</button>
         <div className="d-none" id="countries">
             <h3>Londres, Reino Unido:</h3>
