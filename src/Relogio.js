@@ -9,14 +9,12 @@ const generateTime = (extraHours) => {
 
     const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
 
-    // console.log(totalHours)
-
     return time + " - " + date;
 }
 
 function toggleCountries() {
-    const x = document.getElementById("countries");
-    x.classList.toggle("d-none")
+    const outrosPaises = document.getElementById("countries");
+    outrosPaises.classList.toggle("d-none")
 }
 
 const Relogio = (props) => (

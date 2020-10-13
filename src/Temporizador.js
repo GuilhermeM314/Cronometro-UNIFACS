@@ -7,6 +7,18 @@ export default class Temporizador extends Component {
     state = {
         minutes: 0,
         seconds: 5,
+        play: false
+    }
+
+    resetTime() {
+        // this.state.minutes = 0,
+        //     this.state.seconds = 0,
+        //     this.state.play = false
+        this.setState({
+            minutes: 0,
+            seconds: 0,
+            play: false
+        })
     }
 
     componentDidMount() {
@@ -43,6 +55,8 @@ export default class Temporizador extends Component {
                     ? <h1>Busted!</h1>
                     : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
                 }
+                <button>GO</button>
+                <button onClick={() => this.resetTime()}>RESET</button>
             </div>
         )
     }
