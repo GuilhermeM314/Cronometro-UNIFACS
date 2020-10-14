@@ -4,6 +4,8 @@ import Botao from './Botao'
 import LabelRelogio from './LabelRelogio'
 import Relogio from './Relogio'
 import Temporizador from './Temporizador'
+import Arrow from './Arrow'
+import screenHandler from './screenHandler'
 import './App.css';
 
 class App extends React.Component {
@@ -116,21 +118,27 @@ class App extends React.Component {
 
     return (
       <div id="container">
-        <div>
+        <div className="tool-box" id="relogio">
           <Relogio />
+          <Arrow onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
-        <hr></hr>
-
-        <div>
+        {/* <hr></hr> */}
+        <div className="tool-box opacity-0 hidden" id="cronometro">
+          <Arrow onClick={() => screenHandler.showRelogio()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
           <LabelRelogio name={this.state.name} />
           <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} />
           <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
           <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
           <Botao onClick={() => this.parcial()} label={"Pacial"} />
           <LabelRelogio name={this.state.parcial} />
+          <Arrow onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
-
-        <Temporizador />
+        {/* <hr></hr> */}
+        <div className="tool-box opacity-0 hidden" id="temporizador">
+          <Arrow onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <LabelRelogio name="Temporizador" />
+          <Temporizador />
+        </div>
       </div>
     );
   }
