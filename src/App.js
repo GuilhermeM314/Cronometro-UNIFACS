@@ -74,6 +74,7 @@ class App extends React.Component {
     }
   }
 
+  // Erro dos segundos chegando em 60. Está contando 1 minuto aos 61 segundos.
   incrementar() {
     if (this.state.stop === false) {
       this.setState(
