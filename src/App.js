@@ -20,7 +20,8 @@ class App extends React.Component {
       stop: false,
       nameStop: "Stop",
       name: "Cronômetro",
-      parcial: ""
+      parcial: "",
+      parciais: []
     };
   }
   zerarCronometro() {
@@ -31,11 +32,24 @@ class App extends React.Component {
     this.state.parcial = ""
   }
 
-  parcial() {
-    let p = this.state.horas + ":" + this.state.minutos + ":" + this.state.segundos + ":" + this.state.centesimos + "\n\n"
+  parcial() {    
+    let p = this.state.horas + ":" + this.state.minutos + ":" + this.state.segundos + ":" + this.state.centesimos
+    const result = this.state.parcial + p 
+    this.setState({...this.state, parciais: [...this.state.parciais, result]})
+    const repl = result.replace(':', '').replace(':', '').replace(':', '').replace(':', '')
+
+    console.log('=>', this.state.parciais)
+    return(
+      <h1><span>teste</span></h1>
+    )
+   
+  }
+
+  /* parcial() {
+    let p = this.state.horas + ":" + this.state.minutos + ":" + this.state.segundos + ":" + this.state.centesimos + "\n"
     // let p = {` ${this.state.horas} + : + ${this.state.minutos} + : + ${this.state.segundos} + : + ${this.state.centesimos} + \n\n`}
     this.state.parcial = this.state.parcial + p
-  }
+  } */
 
   pararTempo() {
     this.setState({
@@ -64,7 +78,7 @@ class App extends React.Component {
     if (this.state.stop === false) {
       this.setState(
         function (state, props) {
-          if (state.segundos >= 60) {
+          if (state.segundos >= 59) {
             this.zerar();
             this.incrementarMinuto(state);
           }
@@ -113,10 +127,8 @@ class App extends React.Component {
       () => this.incrementarCentesimo(), 10)
   }
 
-
   render() {
-
-    return (
+    return (      
       <div id="container">
         <div className="tool-box" id="relogio">
           <Relogio />
@@ -130,7 +142,12 @@ class App extends React.Component {
           <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
           <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
           <Botao onClick={() => this.parcial()} label={"Pacial"} />
-          <LabelRelogio name={this.state.parcial} />
+         {/*  <LabelRelogio name={this.state.parcial} /> */}
+         {
+           this.state.parciais.map(item => (
+             <h3>{item}</h3> 
+           ))
+         }
           <Arrow onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
         {/* <hr></hr> */}
