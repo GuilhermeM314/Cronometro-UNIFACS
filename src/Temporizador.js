@@ -5,9 +5,8 @@ import React, { Component } from 'react'
 
 export default class Temporizador extends Component {
     state = {
-        minutes: 0,
-        seconds: 5,
-        play: false
+        minutes: 10,
+        seconds: 60,
     }
 
     resetTime() {
@@ -17,11 +16,40 @@ export default class Temporizador extends Component {
         this.setState({
             minutes: 0,
             seconds: 0,
-            play: false
         })
     }
 
+    stopTime(){
+        console.log(this.state)
+        clearInterval(this.myInterval)
+    }
+
     componentDidMount() {
+      
+    }
+    /* componentDidMount() {
+        this.myInterval = setInterval(() => {
+            const { seconds, minutes } = this.state
+
+            if (seconds > 0) {
+                this.setState(({ seconds }) => ({
+                    seconds: seconds - 1
+                }))
+            }
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    clearInterval(this.myInterval)
+                } else {
+                    this.setState(({ minutes }) => ({
+                        minutes: minutes - 1,
+                        seconds: 59
+                    }))
+                }
+            }
+        }, 1000)
+    } */
+
+    start() {
         this.myInterval = setInterval(() => {
             const { seconds, minutes } = this.state
 
@@ -51,12 +79,27 @@ export default class Temporizador extends Component {
         const { minutes, seconds } = this.state
         return (
             <div>
-                { minutes === 0 && seconds === 0
+                {/* { minutes === 0 && seconds === 0
                     ? <h1>Busted!</h1>
                     : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
-                }
-                <button>GO</button>
+                } */}
+                <button onClick={() => this.start()}>GO</button>
+                <button onClick={() => this.stopTime()}>STOP</button>
                 <button onClick={() => this.resetTime()}>RESET</button>
+                <div>
+                    <label htmlFor="minutes">minutes</label>
+                    <input type="number" value={minutes} name="minutus" onChange={({target: {value}}) => {
+                        console.log(this.state)
+                        this.setState({...this.state, minutes: value})
+                    }}/>
+                </div>
+                <div>
+                    <label htmlFor="seconds">seconds</label>
+                    <input type="number" value={seconds} name="seconds" onChange={({target: {value}}) => {
+                        console.log(this.state)
+                        this.setState({...this.state, seconds: value})
+                    }}/>
+                </div>
             </div>
         )
     }
