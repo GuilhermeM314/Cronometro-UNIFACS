@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import {notification, Button, Radio, Input } from 'antd'
-import { PoweroffOutlined } from '@ant-design/icons';
+import { notification, Button, Radio, Input } from 'antd'
+// import { PoweroffOutlined } from '@ant-design/icons';
 // Feito com base no código da página seguinte:
 // https://medium.com/better-programming/building-a-simple-countdown-timer-with-react-4ca32763dda7
-
-
-
 
 export default class Temporizador extends Component {
     state = {
@@ -14,42 +11,39 @@ export default class Temporizador extends Component {
         loading: false,
     }
 
-    openNotification(){
+    openNotification() {
         notification.open({
-          message: 'Start',
-          description:
-            'contando...',
-          onClick: () => {
-            console.log('Notification Clicked!');
-          },
+            message: 'Start',
+            description:
+                'contando...',
+            onClick: () => {
+                console.log('Notification Clicked!');
+            },
         });
     };
 
-    finishNotification(){
+    finishNotification() {
         notification.open({
-          message: 'Finish',
-          description:
-            'fim...',
-          onClick: () => {
-            console.log('Notification Clicked!');
-          },
+            message: 'Finish',
+            description:
+                'fim...',
+            onClick: () => {
+                console.log('Notification Clicked!');
+            },
         });
     };
-    minuteFinalNotification(){
+    minuteFinalNotification() {
         notification.open({
-          message: 'Minuto Final',
-          description:
-            'ultimo minuto',
-          onClick: () => {
-            console.log('Notification Clicked!');
-          },
+            message: 'Minuto Final',
+            description:
+                'ultimo minuto',
+            onClick: () => {
+                console.log('Notification Clicked!');
+            },
         });
     };
 
     resetTime() {
-        // this.state.minutes = 0,
-        //     this.state.seconds = 0,
-        //     this.state.play = false
         this.setState({
             minutes: 0,
             seconds: 0,
@@ -57,14 +51,14 @@ export default class Temporizador extends Component {
         })
     }
 
-    stopTime(){
+    stopTime() {
         console.log(this.state)
-        this.setState({...this.state, loading: false})
+        this.setState({ ...this.state, loading: false })
         clearInterval(this.myInterval)
     }
 
     componentDidMount() {
-      
+
     }
     /* componentDidMount() {
         this.myInterval = setInterval(() => {
@@ -89,7 +83,7 @@ export default class Temporizador extends Component {
     } */
 
     start() {
-        this.setState({...this.state, loading: true})
+        this.setState({ ...this.state, loading: true })
         this.openNotification()
         this.myInterval = setInterval(() => {
             const { seconds, minutes } = this.state
@@ -99,9 +93,9 @@ export default class Temporizador extends Component {
                     seconds: seconds - 1
                 }))
             }
-            if (seconds === 0) {             
-                if (minutes === 0) { 
-                    this.setState({...this.state, loading: false})
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    this.setState({ ...this.state, loading: false })
                     this.finishNotification()
                     clearInterval(this.myInterval)
                     console.log(minutes)
@@ -129,23 +123,23 @@ export default class Temporizador extends Component {
                 } */}
                 {this.state.loading === false ? (
                     <Radio.Button onClick={() => this.start()}>GO</Radio.Button>
-                ): <Button loading={<h1>Carregando...</h1>} onClick={() => this.start()}>GO</Button>}
+                ) : <Button loading={<h1>Carregando...</h1>} onClick={() => this.start()}>GO</Button>}
 
                 <Radio.Button onClick={() => this.stopTime()}>STOP</Radio.Button>
                 <Radio.Button onClick={() => this.resetTime()}>RESET</Radio.Button>
                 <div>
                     <label htmlFor="minutes">minutes</label>
-                    <Input placeholder="Minutos" type="number" value={minutes} name="minutus" onChange={({target: {value}}) => {
+                    <Input placeholder="Minutos" type="number" value={minutes} name="minutus" onChange={({ target: { value } }) => {
                         console.log(this.state)
-                        this.setState({...this.state, minutes: value})
-                    }}/>
+                        this.setState({ ...this.state, minutes: value })
+                    }} />
                 </div>
                 <div>
                     <label htmlFor="seconds">seconds</label>
-                    <Input placeholder="Segundos" type="number" value={seconds} name="seconds" onChange={({target: {value}}) => {
+                    <Input placeholder="Segundos" type="number" value={seconds} name="seconds" onChange={({ target: { value } }) => {
                         console.log(this.state)
-                        this.setState({...this.state, seconds: value})
-                    }}/>
+                        this.setState({ ...this.state, seconds: value })
+                    }} />
                 </div>
             </div>
         )

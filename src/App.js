@@ -9,8 +9,6 @@ import screenHandler from './screenHandler'
 import './App.css';
 import 'antd/dist/antd.css';
 
-import moment from 'moment-timezone'
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +21,6 @@ class App extends React.Component {
       stop: false,
       nameStop: "Stop",
       name: "Cronômetro",
-      parcial: "",
       parciais: [],
       ultimaParcial: {
         centesimos: 0,
@@ -38,7 +35,7 @@ class App extends React.Component {
     this.state.segundos = 0
     this.state.minutos = 0
     this.state.horas = 0
-    this.state.parcial = ""
+    this.state.parciais = []
     this.state.ultimaParcial = {
       centesimos: 0,
       segundos: 0,
@@ -79,25 +76,12 @@ class App extends React.Component {
     this.state.ultimaParcial.minutos = this.state.minutos
     this.state.ultimaParcial.horas = this.state.horas
 
-    // console.log("Diferença: ", diferenca)
-    // console.log("Ultima parcial: ", this.state.ultimaParcial)
-
-    const result = this.state.parcial + p + "\n\n" + "+" + diferenca
+    const result = p + "\n\n+" + diferenca
     this.setState({ ...this.state, parciais: [...this.state.parciais, result] })
-    const repl = result.replace(':', '').replace(':', '').replace(':', '').replace(':', '')
+    // const repl = result.replace(':', '').replace(':', '').replace(':', '').replace(':', '')
 
     console.log('=>', this.state.parciais)
-    return (
-      <h1><span>teste</span></h1>
-    )
-
   }
-
-  /* parcial() {
-    let p = this.state.horas + ":" + this.state.minutos + ":" + this.state.segundos + ":" + this.state.centesimos + "\n"
-    // let p = {` ${this.state.horas} + : + ${this.state.minutos} + : + ${this.state.segundos} + : + ${this.state.centesimos} + \n\n`}
-    this.state.parcial = this.state.parcial + p
-  } */
 
   pararTempo() {
     this.setState({
@@ -122,7 +106,6 @@ class App extends React.Component {
     }
   }
 
-  // Erro dos segundos chegando em 60. Está contando 1 minuto aos 61 segundos.
   incrementar() {
     if (this.state.stop === false) {
       this.setState(
@@ -172,19 +155,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    /*  var brasil    = moment.tz(Date.now(), "America/Bahia");
-     var eua       = moment.tz("America/New_York");
-     var india     = moment.tz("Asia/Colombo");
-     var china     = moment.tz("Asia/Shangai");
-     var australia     = moment.tz("Australia/Sydney");
-     var japan     = moment.tz("Asia/Tokyo");
- 
-     console.log('br', brasil.format("DD-MM-YYYY H:m:s"))
-     console.log('eua', eua.format("DD-MM-YYYY H:m:s"))
-     console.log('india', india.format("DD-MM-YYYY H:m:s"))
-     console.log('china', china.format("DD-MM-YYYY H:m:s"))
-     console.log('autralia', australia.format("DD-MM-YYYY H:m:s"))
-     console.log('japan', japan.format("DD-MM-YYYY H:m:s")) */
     this.timer = setInterval(
       () => this.incrementarCentesimo(), 10)
   }
@@ -196,7 +166,7 @@ class App extends React.Component {
           <Relogio />
           <Arrow onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
-        {/* <hr></hr> */}
+
         <div className="tool-box opacity-0 hidden" id="cronometro">
           <Arrow onClick={() => screenHandler.showRelogio()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
           <LabelRelogio name={this.state.name} />
@@ -212,7 +182,7 @@ class App extends React.Component {
           }
           <Arrow onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
-        {/* <hr></hr> */}
+
         <div className="tool-box opacity-0 hidden" id="temporizador">
           <Arrow onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
           <LabelRelogio name="Temporizador" />
