@@ -24,7 +24,13 @@ class App extends React.Component {
       nameStop: "Stop",
       name: "Cronômetro",
       parcial: "",
-      parciais: []
+      parciais: [],
+      ultimaParcial: {
+        centesimos: 0,
+        segundos: 0,
+        minutos: 0,
+        horas: 0,
+      }
     };
   }
   zerarCronometro() {
@@ -33,19 +39,58 @@ class App extends React.Component {
     this.state.minutos = 0
     this.state.horas = 0
     this.state.parcial = ""
+    this.state.ultimaParcial = {
+      centesimos: 0,
+      segundos: 0,
+      minutos: 0,
+      horas: 0,
+    }
   }
 
-  parcial() {    
+  parcial() {
     let p = this.state.horas + ":" + this.state.minutos + ":" + this.state.segundos + ":" + this.state.centesimos
-    const result = this.state.parcial + p 
-    this.setState({...this.state, parciais: [...this.state.parciais, result]})
+
+    let horasDaDiferenca = this.state.horas - this.state.ultimaParcial.horas
+
+    let minutosDaDiferenca = this.state.minutos - this.state.ultimaParcial.minutos
+    if (minutosDaDiferenca < 0) {
+      horasDaDiferenca = horasDaDiferenca - 1
+      minutosDaDiferenca += 60
+    }
+
+    let segundosDaDiferenca = this.state.segundos - this.state.ultimaParcial.segundos
+    if (segundosDaDiferenca < 0) {
+      minutosDaDiferenca = minutosDaDiferenca - 1
+      segundosDaDiferenca += 60
+    }
+
+    let centesimosDaDiferenca = this.state.centesimos - this.state.ultimaParcial.centesimos
+    if (centesimosDaDiferenca < 0) {
+      segundosDaDiferenca = segundosDaDiferenca - 1
+      centesimosDaDiferenca += 100
+    }
+
+    console.log(`Diferença: ${horasDaDiferenca}: ${minutosDaDiferenca}: ${segundosDaDiferenca}: ${centesimosDaDiferenca}`)
+
+    let diferenca = horasDaDiferenca + ":" + minutosDaDiferenca + ":" + segundosDaDiferenca + ":" + centesimosDaDiferenca
+
+    this.state.ultimaParcial.centesimos = this.state.centesimos
+    this.state.ultimaParcial.segundos = this.state.segundos
+    this.state.ultimaParcial.minutos = this.state.minutos
+    this.state.ultimaParcial.horas = this.state.horas
+
+    // console.log("Diferença: ", diferenca)
+    // console.log("Ultima parcial: ", this.state.ultimaParcial)
+
+    const result = this.state.parcial + p + "\n\n" + "+" + diferenca
+    this.setState({ ...this.state, parciais: [...this.state.parciais, result] })
     const repl = result.replace(':', '').replace(':', '').replace(':', '').replace(':', '')
 
     console.log('=>', this.state.parciais)
-    return(
+    return (
       <h1><span>teste</span></h1>
     )
-   
+
   }
 
   /* parcial() {
@@ -127,25 +172,25 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-   /*  var brasil    = moment.tz(Date.now(), "America/Bahia");
-    var eua       = moment.tz("America/New_York");
-    var india     = moment.tz("Asia/Colombo");
-    var china     = moment.tz("Asia/Shangai");
-    var australia     = moment.tz("Australia/Sydney");
-    var japan     = moment.tz("Asia/Tokyo");
-
-    console.log('br', brasil.format("DD-MM-YYYY H:m:s"))
-    console.log('eua', eua.format("DD-MM-YYYY H:m:s"))
-    console.log('india', india.format("DD-MM-YYYY H:m:s"))
-    console.log('china', china.format("DD-MM-YYYY H:m:s"))
-    console.log('autralia', australia.format("DD-MM-YYYY H:m:s"))
-    console.log('japan', japan.format("DD-MM-YYYY H:m:s")) */
+    /*  var brasil    = moment.tz(Date.now(), "America/Bahia");
+     var eua       = moment.tz("America/New_York");
+     var india     = moment.tz("Asia/Colombo");
+     var china     = moment.tz("Asia/Shangai");
+     var australia     = moment.tz("Australia/Sydney");
+     var japan     = moment.tz("Asia/Tokyo");
+ 
+     console.log('br', brasil.format("DD-MM-YYYY H:m:s"))
+     console.log('eua', eua.format("DD-MM-YYYY H:m:s"))
+     console.log('india', india.format("DD-MM-YYYY H:m:s"))
+     console.log('china', china.format("DD-MM-YYYY H:m:s"))
+     console.log('autralia', australia.format("DD-MM-YYYY H:m:s"))
+     console.log('japan', japan.format("DD-MM-YYYY H:m:s")) */
     this.timer = setInterval(
       () => this.incrementarCentesimo(), 10)
   }
 
   render() {
-    return (      
+    return (
       <div id="container">
         <div className="tool-box" id="relogio">
           <Relogio />
@@ -159,12 +204,12 @@ class App extends React.Component {
           <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
           <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
           <Botao onClick={() => this.parcial()} label={"Pacial"} />
-         {/*  <LabelRelogio name={this.state.parcial} /> */}
-         {
-           this.state.parciais.map(item => (
-             <h3>{item}</h3> 
-           ))
-         }
+          {/*  <LabelRelogio name={this.state.parcial} /> */}
+          {
+            this.state.parciais.map(item => (
+              <h3>{item}</h3>
+            ))
+          }
           <Arrow onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
         {/* <hr></hr> */}
