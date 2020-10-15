@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {notification} from 'antd'
+import {notification, Button, Radio, Input } from 'antd'
+import { PoweroffOutlined } from '@ant-design/icons';
 // Feito com base no código da página seguinte:
 // https://medium.com/better-programming/building-a-simple-countdown-timer-with-react-4ca32763dda7
 
@@ -10,6 +11,7 @@ export default class Temporizador extends Component {
     state = {
         minutes: 10,
         seconds: 60,
+        loading: false,
     }
 
     openNotification(){
@@ -51,11 +53,13 @@ export default class Temporizador extends Component {
         this.setState({
             minutes: 0,
             seconds: 0,
+            loading: false
         })
     }
 
     stopTime(){
         console.log(this.state)
+        this.setState({...this.state, loading: false})
         clearInterval(this.myInterval)
     }
 
@@ -85,6 +89,7 @@ export default class Temporizador extends Component {
     } */
 
     start() {
+        this.setState({...this.state, loading: true})
         this.openNotification()
         this.myInterval = setInterval(() => {
             const { seconds, minutes } = this.state
@@ -96,6 +101,7 @@ export default class Temporizador extends Component {
             }
             if (seconds === 0) {             
                 if (minutes === 0) { 
+                    this.setState({...this.state, loading: false})
                     this.finishNotification()
                     clearInterval(this.myInterval)
                     console.log(minutes)
@@ -121,19 +127,22 @@ export default class Temporizador extends Component {
                     ? <h1>Busted!</h1>
                     : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
                 } */}
-                <button onClick={() => this.start()}>GO</button>
-                <button onClick={() => this.stopTime()}>STOP</button>
-                <button onClick={() => this.resetTime()}>RESET</button>
+                {this.state.loading === false ? (
+                    <Radio.Button onClick={() => this.start()}>GO</Radio.Button>
+                ): <Button loading={<h1>Carregando...</h1>} onClick={() => this.start()}>GO</Button>}
+
+                <Radio.Button onClick={() => this.stopTime()}>STOP</Radio.Button>
+                <Radio.Button onClick={() => this.resetTime()}>RESET</Radio.Button>
                 <div>
                     <label htmlFor="minutes">minutes</label>
-                    <input type="number" value={minutes} name="minutus" onChange={({target: {value}}) => {
+                    <Input placeholder="Minutos" type="number" value={minutes} name="minutus" onChange={({target: {value}}) => {
                         console.log(this.state)
                         this.setState({...this.state, minutes: value})
                     }}/>
                 </div>
                 <div>
                     <label htmlFor="seconds">seconds</label>
-                    <input type="number" value={seconds} name="seconds" onChange={({target: {value}}) => {
+                    <Input placeholder="Segundos" type="number" value={seconds} name="seconds" onChange={({target: {value}}) => {
                         console.log(this.state)
                         this.setState({...this.state, seconds: value})
                     }}/>
