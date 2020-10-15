@@ -1,13 +1,48 @@
 import React, { Component } from 'react'
-
+import {notification} from 'antd'
 // Feito com base no código da página seguinte:
 // https://medium.com/better-programming/building-a-simple-countdown-timer-with-react-4ca32763dda7
+
+
+
 
 export default class Temporizador extends Component {
     state = {
         minutes: 10,
         seconds: 60,
     }
+
+    openNotification(){
+        notification.open({
+          message: 'Start',
+          description:
+            'contando...',
+          onClick: () => {
+            console.log('Notification Clicked!');
+          },
+        });
+    };
+
+    finishNotification(){
+        notification.open({
+          message: 'Finish',
+          description:
+            'fim...',
+          onClick: () => {
+            console.log('Notification Clicked!');
+          },
+        });
+    };
+    minuteFinalNotification(){
+        notification.open({
+          message: 'Minuto Final',
+          description:
+            'ultimo minuto',
+          onClick: () => {
+            console.log('Notification Clicked!');
+          },
+        });
+    };
 
     resetTime() {
         // this.state.minutes = 0,
@@ -50,6 +85,7 @@ export default class Temporizador extends Component {
     } */
 
     start() {
+        this.openNotification()
         this.myInterval = setInterval(() => {
             const { seconds, minutes } = this.state
 
@@ -58,9 +94,11 @@ export default class Temporizador extends Component {
                     seconds: seconds - 1
                 }))
             }
-            if (seconds === 0) {
-                if (minutes === 0) {
+            if (seconds === 0) {             
+                if (minutes === 0) { 
+                    this.finishNotification()
                     clearInterval(this.myInterval)
+                    console.log(minutes)
                 } else {
                     this.setState(({ minutes }) => ({
                         minutes: minutes - 1,
