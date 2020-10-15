@@ -76,7 +76,7 @@ class App extends React.Component {
     this.state.ultimaParcial.minutos = this.state.minutos
     this.state.ultimaParcial.horas = this.state.horas
 
-    const result = p + "\n\n+" + diferenca
+    const result = p + "\n|\n+" + diferenca
     this.setState({ ...this.state, parciais: [...this.state.parciais, result] })
     // const repl = result.replace(':', '').replace(':', '').replace(':', '').replace(':', '')
 
@@ -169,17 +169,21 @@ class App extends React.Component {
 
         <div className="tool-box opacity-0 hidden" id="cronometro">
           <Arrow name="Relógio" onClick={() => screenHandler.showRelogio()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
-          <LabelRelogio name={this.state.name} />
-          <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} />
-          <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
-          <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
-          <Botao onClick={() => this.parcial()} label={"Pacial"} />
+          <div id="tempo">
+            <LabelRelogio name={this.state.name} />
+            <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} />
+            <div id="botoes">
+              <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
+              <Botao onClick={() => this.pararTempo()} label={this.state.nameStop} />
+              <Botao onClick={() => this.parcial()} label={"Pacial"} />
+            </div>
+            {
+              this.state.parciais.map(item => (
+                <h3>{item}</h3>
+              ))
+            }
+          </div>
           {/*  <LabelRelogio name={this.state.parcial} /> */}
-          {
-            this.state.parciais.map(item => (
-              <h3>{item}</h3>
-            ))
-          }
           <Arrow name="Temporizador" onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
 

@@ -11,6 +11,38 @@
   background-repeat: no-repeat;
 }
 
+#cronometro {
+  justify-content: space-around;
+  background-image: url("https://images8.alphacoders.com/835/835050.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#cronometro > * {
+  color: #000;
+}
+
+#cronometro > a:nth-child(3) {
+  color: #fff;
+}
+
+#tempo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* #tempo > * {
+  color: white;
+} */
+
+#cronometro > tempo,
+#cronometro > botoes {
+  justify-self: center !important;
+  align-self: center;
+}
+
 .hidden {
   display: none !important;
 }
