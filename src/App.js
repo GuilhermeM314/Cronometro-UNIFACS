@@ -9,6 +9,8 @@ import screenHandler from './screenHandler'
 import './App.css';
 import 'antd/dist/antd.css';
 
+import moment from 'moment-timezone'
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -125,6 +127,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+   /*  var brasil    = moment.tz(Date.now(), "America/Bahia");
+    var eua       = moment.tz("America/New_York");
+    var india     = moment.tz("Asia/Colombo");
+    var china     = moment.tz("Asia/Shangai");
+    var australia     = moment.tz("Australia/Sydney");
+    var japan     = moment.tz("Asia/Tokyo");
+
+    console.log('br', brasil.format("DD-MM-YYYY H:m:s"))
+    console.log('eua', eua.format("DD-MM-YYYY H:m:s"))
+    console.log('india', india.format("DD-MM-YYYY H:m:s"))
+    console.log('china', china.format("DD-MM-YYYY H:m:s"))
+    console.log('autralia', australia.format("DD-MM-YYYY H:m:s"))
+    console.log('japan', japan.format("DD-MM-YYYY H:m:s")) */
     this.timer = setInterval(
       () => this.incrementarCentesimo(), 10)
   }
