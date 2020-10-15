@@ -6,8 +6,8 @@ import { notification, Button, Radio, Input } from 'antd'
 
 export default class Temporizador extends Component {
     state = {
-        minutes: 10,
-        seconds: 60,
+        minutes: 0,
+        seconds: 0,
         loading: false,
     }
 
@@ -99,6 +99,7 @@ export default class Temporizador extends Component {
                     this.finishNotification()
                     clearInterval(this.myInterval)
                     console.log(minutes)
+                    console.log('terminou')
                 } else {
                     this.setState(({ minutes }) => ({
                         minutes: minutes - 1,
