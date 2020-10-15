@@ -164,11 +164,11 @@ class App extends React.Component {
       <div id="container">
         <div className="tool-box" id="relogio">
           <Relogio />
-          <Arrow onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <Arrow name="Cronômetro" onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
 
         <div className="tool-box opacity-0 hidden" id="cronometro">
-          <Arrow onClick={() => screenHandler.showRelogio()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <Arrow name="Relógio" onClick={() => screenHandler.showRelogio()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
           <LabelRelogio name={this.state.name} />
           <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} />
           <Botao onClick={() => this.zerarCronometro()} label={"Zerar"} />
@@ -180,11 +180,11 @@ class App extends React.Component {
               <h3>{item}</h3>
             ))
           }
-          <Arrow onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <Arrow name="Temporizador" onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
         </div>
 
         <div className="tool-box opacity-0 hidden" id="temporizador">
-          <Arrow onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <Arrow name="Cronômetro" onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
           <LabelRelogio name="Temporizador" />
           <Temporizador />
         </div>

@@ -5,6 +5,12 @@
   background-color: gray;
 }
 
+#relogio {
+  background-image: url("https://i.pinimg.com/originals/4d/18/ae/4d18ae93e2a85ec979812c31b11ef9a3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .hidden {
   display: none !important;
 }

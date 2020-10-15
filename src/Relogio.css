@@ -1,3 +1,33 @@
+#relogio-container * {
+    color: white;
+}
+
+#toggle-countries {
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    margin-bottom: 50px;
+    height: 35px;
+    width: 150px;
+
+    background-color: #375d68;
+    color: white;
+}
+
+#toggle-countries:hover {
+    background-color: #0775a1;
+}
+
+#countries > h3 {
+    margin-bottom: 30px;
+}
+
+.highlight-btn {
+    background-color: #0775a1 !important;
+}
+
 .d-none {
     display: none;
 }

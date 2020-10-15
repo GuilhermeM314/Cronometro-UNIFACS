@@ -7,6 +7,7 @@ import moment from 'moment-timezone'
 function toggleCountries() {
     const outrosPaises = document.getElementById("countries");
     outrosPaises.classList.toggle("d-none")
+    document.getElementById("toggle-countries").classList.toggle('highlight-btn')
 }
 
 const Relogio = (props) => {
@@ -44,22 +45,22 @@ const Relogio = (props) => {
     }, [])
 
     return (
-        <div>
+        <div id="relogio-container">
             <h1>Brasília, Brasil:</h1>
             <h2 className="localTime mb-30">{brasil}</h2>
 
-            <button onClick={toggleCountries} id="toggleCountries">Outros países</button>
+            <button onClick={toggleCountries} id="toggle-countries">Outros países</button>
             <div className="d-none" id="countries">
-                <h3>Nova Iorque, EUA:</h3>
-                <p>{eua}</p>
-                <h3>Colombo, India:</h3>
-                <p>{india}</p>
-                <h3>Macau, China:</h3>
-                <p>{china}</p>
-                <h3>Sydney, Australia:</h3>
-                <p>{australia}</p>
-                <h3>Tokyo, Japão:</h3>
-                <p>{japan}</p>
+                <h2>Nova Iorque, EUA:</h2>
+                <h3>{eua}</h3>
+                <h2>Colombo, India:</h2>
+                <h3>{india}</h3>
+                <h2>Macau, China:</h2>
+                <h3>{china}</h3>
+                <h2>Sydney, Australia:</h2>
+                <h3>{australia}</h3>
+                <h2>Tokyo, Japão:</h2>
+                <h3>{japan}</h3>
             </div>
         </div>
     )
