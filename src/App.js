@@ -7,6 +7,7 @@ import Temporizador from './Temporizador'
 import Arrow from './Arrow'
 import screenHandler from './screenHandler'
 import './App.css';
+import 'antd/dist/antd.css';
 
 class App extends React.Component {
   constructor(props) {
