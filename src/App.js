@@ -1,6 +1,7 @@
 import React from 'react';
 import Contador from './Contador'
-import Botao from './Botao'
+/* import Botao from './Botao' */
+import {Button} from 'antd'
 import LabelRelogio from './LabelRelogio'
 import Relogio from './Relogio'
 import Temporizador from './Temporizador'
@@ -18,8 +19,8 @@ class App extends React.Component {
       segundos: 0,
       minutos: 0,
       horas: 0,
-      stop: false,
-      nameStop: "Stop",
+      stop: true,
+      nameStop: "Start",
       name: "Cronômetro",
       parciais: [],
       ultimaParcial: {
@@ -173,9 +174,9 @@ class App extends React.Component {
             <LabelRelogio name={this.state.name} />
             <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} />
             <div id="botoes">
-              <Botao className="btn-red" onClick={() => this.zerarCronometro()} label={"Zerar"} />
-              <Botao className="btn-green" onClick={() => this.pararTempo()} label={this.state.nameStop} />
-              <Botao onClick={() => this.parcial()} label={"Pacial"} />
+              <Button danger onClick={() => this.zerarCronometro()}  >Zerar</Button>
+              <Button primary onClick={() => this.pararTempo()} label={this.state.nameStop} >{this.state.nameStop}</Button>
+              <Button primary onClick={() => this.parcial()} label={"Pacial"} >Parcial</Button>
             </div>
             {
               this.state.parciais.map(item => (
