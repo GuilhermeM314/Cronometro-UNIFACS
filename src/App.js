@@ -8,7 +8,7 @@ import screenHandler from './screenHandler'
 import './App.css';
 import 'antd/dist/antd.css';
 
-import { Button, Timeline, Card } from 'antd';
+import { notification, Button, Timeline, Card } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined, HistoryOutlined, ClockCircleOutlined, CaretUpOutlined, CaretDownOutlined  } from '@ant-design/icons';
 
 class App extends React.Component {
@@ -32,7 +32,18 @@ class App extends React.Component {
       }
     };
   }
+
+  notification(message, description) {
+    notification.open({
+        message,
+        description,
+        onClick: () => {
+            console.log('Notification Clicked!');
+        },
+    });
+  };
   zerarCronometro() {
+    this.notification('Zerado', 'Cronômetro foi zerado..')
     this.setState({...this.state, ultimaParcial: {
       centesimos: 0,
       segundos: 0,
@@ -53,6 +64,8 @@ class App extends React.Component {
   }
 
   parcial() {
+    const {centesimos, segundos, minutos, horas} =this.state.ultimaParcial
+    this.notification('Parciais', `${horas}:${minutos}:${segundos}:${centesimos}`)
     let p = this.state.horas + ":" + this.state.minutos + ":" + this.state.segundos + ":" + this.state.centesimos
 
     let horasDaDiferenca = this.state.horas - this.state.ultimaParcial.horas
@@ -91,14 +104,18 @@ class App extends React.Component {
     console.log('=>', this.state.parciais)
   }
 
-  pararTempo() {
+  pararTempo() {    
     this.setState({
       stop: !this.state.stop
     })
-    if (this.state.stop)
+    if (this.state.stop) {
+      this.notification('Iniciado', 'Cronômetro foi iniciado...')
       this.state.nameStop = "Stop"
-    else
+    }
+    else {      
+      this.notification('Parado', 'Cronômetro foi parado...')
       this.state.nameStop = "Start"
+    }
   }
 
   incrementarCentesimo() {
