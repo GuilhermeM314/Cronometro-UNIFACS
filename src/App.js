@@ -8,7 +8,7 @@ import screenHandler from './screenHandler'
 import './App.css';
 import 'antd/dist/antd.css';
 
-import { Button, Timeline, Card  } from 'antd';
+import { Button, Timeline, Card } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined, HistoryOutlined, ClockCircleOutlined, CaretUpOutlined, CaretDownOutlined  } from '@ant-design/icons';
 
 class App extends React.Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { notification, Button, Radio, Input } from 'antd'
+import { notification, Button, Radio, Input, Card } from 'antd'
 // import { PoweroffOutlined } from '@ant-design/icons';
 // Feito com base no código da página seguinte:
 // https://medium.com/better-programming/building-a-simple-countdown-timer-with-react-4ca32763dda7
@@ -117,32 +117,34 @@ export default class Temporizador extends Component {
     render() {
         const { minutes, seconds } = this.state
         return (
-            <div>
-                {/* { minutes === 0 && seconds === 0
-                    ? <h1>Busted!</h1>
-                    : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
-                } */}
-                {this.state.loading === false ? (
-                    <Radio.Button onClick={() => this.start()}>GO</Radio.Button>
-                ) : <Button loading={<h1>Carregando...</h1>} onClick={() => this.start()}>GO</Button>}
+            <Card>
+                <div>
+                    {/* { minutes === 0 && seconds === 0
+                        ? <h1>Busted!</h1>
+                        : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
+                    } */}
+                    {this.state.loading === false ? (
+                        <Radio.Button onClick={() => this.start()}>GO</Radio.Button>
+                    ) : <Button loading={<h1>Carregando...</h1>} onClick={() => this.start()}>GO</Button>}
 
-                <Radio.Button onClick={() => this.stopTime()}>STOP</Radio.Button>
-                <Radio.Button onClick={() => this.resetTime()}>RESET</Radio.Button>
-                <div>
-                    <label htmlFor="minutes">minutes</label>
-                    <Input placeholder="Minutos" type="number" value={minutes} name="minutus" onChange={({ target: { value } }) => {
-                        console.log(this.state)
-                        this.setState({ ...this.state, minutes: value })
-                    }} />
+                    <Radio.Button onClick={() => this.stopTime()}>STOP</Radio.Button>
+                    <Radio.Button onClick={() => this.resetTime()}>RESET</Radio.Button>
+                    <div>
+                        <label htmlFor="minutes">minutes</label>
+                        <Input placeholder="Minutos" type="number" value={minutes} name="minutus" onChange={({ target: { value } }) => {
+                            console.log(this.state)
+                            this.setState({ ...this.state, minutes: value })
+                        }} />
+                    </div>
+                    <div>
+                        <label htmlFor="seconds">seconds</label>
+                        <Input placeholder="Segundos" type="number" value={seconds} name="seconds" onChange={({ target: { value } }) => {
+                            console.log(this.state)
+                            this.setState({ ...this.state, seconds: value })
+                        }} />
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="seconds">seconds</label>
-                    <Input placeholder="Segundos" type="number" value={seconds} name="seconds" onChange={({ target: { value } }) => {
-                        console.log(this.state)
-                        this.setState({ ...this.state, seconds: value })
-                    }} />
-                </div>
-            </div>
+            </Card>
         )
     }
 }
