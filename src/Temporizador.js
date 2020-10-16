@@ -117,7 +117,7 @@ export default class Temporizador extends Component {
     render() {
         const { minutes, seconds } = this.state
         return (
-            <Card>
+            <Card title="TEMPORIZADOR">
                 <div>
                     {/* { minutes === 0 && seconds === 0
                         ? <h1>Busted!</h1>

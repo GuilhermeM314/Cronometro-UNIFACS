@@ -197,7 +197,6 @@ class App extends React.Component {
 
         <div className="tool-box opacity-0 hidden" id="temporizador">
           <CaretUpOutlined style={{fontSize: 40}} onClick={() => screenHandler.showCronometro()}/>
-          <LabelRelogio name="Temporizador" />
           <Temporizador />
         </div>
       </div>
