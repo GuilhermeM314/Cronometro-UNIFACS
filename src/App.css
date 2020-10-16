@@ -29,6 +29,25 @@
   }
 }
 
+.icone {
+}
+
+.icone:hover {
+  animation: icone 1s ease-in-out infinite;
+}
+
+@keyframes icone {
+  0% {
+    font-size: 40px;
+  }
+  50% {
+    font-size: 60px;
+  }
+  100% {
+    font-size: 40px;
+  }
+}
+
 #cronometro > * {
   color: #000;
 }

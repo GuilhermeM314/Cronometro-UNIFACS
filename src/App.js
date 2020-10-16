@@ -172,15 +172,13 @@ class App extends React.Component {
       <div id="container">
         <div className="tool-box" id="relogio">
           <Relogio />
-          <CaretDownOutlined style={{fontSize: 40}}  onClick={() => screenHandler.showCronometro()}/>
+          <CaretDownOutlined className="icone" style={{fontSize: 40}}  onClick={() => screenHandler.showCronometro()}/>
         </div>
 
         <div className="tool-box opacity-0 hidden" id="cronometro">
-          <CaretUpOutlined style={{fontSize: 40}} onClick={() => screenHandler.showRelogio()}/>
+          <CaretUpOutlined className="icone" style={{fontSize: 40}} onClick={() => screenHandler.showRelogio()}/>
           {/* <Arrow name="Relógio"  src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow> */}
-          <Card bordered={false} style={{ width: 600 }}>
-            
-              <LabelRelogio name={this.state.name} />
+          <Card title="CRONÔMETRO" bordered={false} style={{ width: 600 }}>          
               <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} >
                 <Timeline>
                   {
@@ -198,11 +196,11 @@ class App extends React.Component {
           </Card>
           
           {/*  <LabelRelogio name={this.state.parcial} /> */}
-          <CaretDownOutlined style={{fontSize: 40}}  onClick={() => screenHandler.showTemporizador()}/>
+          <CaretDownOutlined className="icone" style={{fontSize: 40}}  onClick={() => screenHandler.showTemporizador()}/>
         </div>
 
         <div className="tool-box opacity-0 hidden" id="temporizador">
-          <CaretUpOutlined style={{fontSize: 40}} onClick={() => screenHandler.showCronometro()}/>
+          <CaretUpOutlined className="icone" style={{fontSize: 40}} onClick={() => screenHandler.showCronometro()}/>
           <Temporizador />
         </div>
       </div>
