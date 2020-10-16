@@ -1,14 +1,15 @@
 import React from 'react';
 import Contador from './Contador'
 /* import Botao from './Botao' */
-import {Button} from 'antd'
 import LabelRelogio from './LabelRelogio'
 import Relogio from './Relogio'
 import Temporizador from './Temporizador'
-import Arrow from './Arrow'
 import screenHandler from './screenHandler'
 import './App.css';
 import 'antd/dist/antd.css';
+
+import { Button, Timeline, Card  } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined, HistoryOutlined, ClockCircleOutlined, CaretUpOutlined, CaretDownOutlined  } from '@ant-design/icons';
 
 class App extends React.Component {
   constructor(props) {
@@ -165,31 +166,37 @@ class App extends React.Component {
       <div id="container">
         <div className="tool-box" id="relogio">
           <Relogio />
-          <Arrow name="Cronômetro" onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <CaretDownOutlined style={{fontSize: 40}}  onClick={() => screenHandler.showCronometro()}/>
         </div>
 
         <div className="tool-box opacity-0 hidden" id="cronometro">
-          <Arrow name="Relógio" onClick={() => screenHandler.showRelogio()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
-          <div id="tempo">
-            <LabelRelogio name={this.state.name} />
-            <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} />
-            <div id="botoes">
-              <Button danger onClick={() => this.zerarCronometro()}  >Zerar</Button>
-              <Button primary onClick={() => this.pararTempo()} label={this.state.nameStop} >{this.state.nameStop}</Button>
-              <Button primary onClick={() => this.parcial()} label={"Pacial"} >Parcial</Button>
-            </div>
-            {
-              this.state.parciais.map(item => (
-                <h3>{item}</h3>
-              ))
-            }
-          </div>
+          <CaretUpOutlined style={{fontSize: 40}} onClick={() => screenHandler.showRelogio()}/>
+          {/* <Arrow name="Relógio"  src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow> */}
+          <Card bordered={false} style={{ width: 600 }}>
+            
+              <LabelRelogio name={this.state.name} />
+              <Contador horas={this.state.horas} minutos={this.state.minutos} segundos={this.state.segundos} centesimos={this.state.centesimos} >
+                <Timeline>
+                  {
+                    this.state.parciais.map(item => (
+                      <Timeline.Item dot={<ClockCircleOutlined className="timeline-clock-icon" />} color="red">{item}</Timeline.Item>
+                    ))
+                  }
+                </Timeline>
+              </Contador>
+              <div id="botoes">
+                <Button danger onClick={() => this.zerarCronometro()}  >Zerar</Button>
+                <Button primary onClick={() => this.pararTempo()} label={this.state.nameStop} >{this.state.nameStop}</Button>
+                <Button primary onClick={() => this.parcial()} label={"Pacial"} >Parcial</Button>
+              </div>
+          </Card>
+          
           {/*  <LabelRelogio name={this.state.parcial} /> */}
-          <Arrow name="Temporizador" onClick={() => screenHandler.showTemporizador()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <CaretDownOutlined style={{fontSize: 40}}  onClick={() => screenHandler.showTemporizador()}/>
         </div>
 
         <div className="tool-box opacity-0 hidden" id="temporizador">
-          <Arrow name="Cronômetro" onClick={() => screenHandler.showCronometro()} src="https://image.flaticon.com/icons/png/512/36/36874.png"></Arrow>
+          <CaretUpOutlined style={{fontSize: 40}} onClick={() => screenHandler.showCronometro()}/>
           <LabelRelogio name="Temporizador" />
           <Temporizador />
         </div>
