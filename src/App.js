@@ -33,7 +33,13 @@ class App extends React.Component {
     };
   }
   zerarCronometro() {
-    this.state.centesimos = -1
+    this.setState({...this.state, ultimaParcial: {
+      centesimos: 0,
+      segundos: 0,
+      minutos: 0,
+      horas: 0,
+    }, centesimos: 0, segundos: 0, minutos: 0, horas: 0, parciais: [] })
+    /* this.state.centesimos = 0
     this.state.segundos = 0
     this.state.minutos = 0
     this.state.horas = 0
@@ -43,7 +49,7 @@ class App extends React.Component {
       segundos: 0,
       minutos: 0,
       horas: 0,
-    }
+    } */
   }
 
   parcial() {
